@@ -1,0 +1,99 @@
+ {% load static %}
+<section class="fixed top-0 left-0 right-0 z-40 bg-white">
+  <header  x-data="{ showSearch: false, showSide: false }" class="flex items-center justify-between sm:w-full md:w-[80%] lg:w-[75%] mx-auto px-1">
+          <div class="text-3xl font-medium">
+            <a href="{% url 'core:home' %}">
+              <img class="w-[100px] md:w-[140px]" src="{% static 'images/logo/WhatsApp Image 2024-04-26 at 16.43 1.svg' %}" alt="">
+            </a>
+          </div>
+          <nav  class="md:flex items-center gap-4 hidden">
+              <a href="{% url 'core:home' %}" class="hover:bg-red-300 {% if request.path == '/' %}bg-red-500 text-white{% endif %}  p-1 rounded transition ease-in-out delay-150">Home</a>
+              <a href="{% url 'core:shop' %}" class="hover:bg-red-300 p-1 {% if request.path == '/shop/' %} bg-red-500 text-white{% endif %} rounded transition ease-in-out delay-150">Menu</a>
+              {% if request.user.is_superuser %}
+              <a href="{% url 'order:orders' %}" class="hover:bg-red-100 p-1 rounded {% if request.path == '/order/all-orders/' %} text-white bg-red-500 {% endif %} transition ease-in-out delay-150">Orders</a>
+              {% endif %}
+              <a href="{% url 'core:about' %}" class="hover:bg-red-300 {% if request.path == '/about/' %} bg-red-500 text-white {% endif %} p-1 rounded transition ease-in-out delay-150 ">Contact</a>
+              {% if user.is_authenticated %}
+              <a href="{% url 'core:logout' %}" class="hover:bg-red-200 p-1 rounded transition ease-in-out delay-150">Logout</a>
+              {% else %}
+              <a href="{% url 'core:login' %}" class="hover:bg-red-200 p-1 rounded transition ease-in-out delay-150">Login</a>
+              {% endif %}
+               <a
+               @click="showSearch = !showSearch"
+            href="#"
+            class="hover:bg-red-200 p-1 rounded transition ease-in-out delay-150"
+            ><i class='bx bx-search' ></i></a
+          >
+          </nav>
+          <nav x-show="showSide" x-cloak @click.away="showSide = false" class="flex fixed top-0 right-0 flex-col w-[250px] justify-center z-[99px] h-screen items-center gap-4 bg-red-100 shadow-lg z-50">
+          <a
+            class="hover:bg-red-200 p-1 rounded transition ease-in-out delay-150"
+            @click="showSide = false"
+            ><i class="fa-solid fa-circle-xmark text-2xl"></i></a
+          >
+          <a
+            href="{% url 'core:home' %}"
+            class="hover:bg-red-200 {% if request.path == '/' %} bg-red-500 text-white {% endif %} p-1 rounded transition ease-in-out delay-150"
+            >Home</a
+          >
+          <a
+            href="{% url 'core:shop' %}"
+            class="hover:bg-red-200 p-1 {% if request.path == '/shop/' %} text-white bg-red-500 {% endif %} rounded transition ease-in-out delay-150"
+            >Menu</a
+          >
+          <!-- <a
+            href="{% url 'cart:cart' %}"
+            class="hover:bg-red-200 p-1 rounded transition ease-in-out delay-150"
+            >Orders</a
+          > -->
+          <a
+            href="{% url 'core:about' %}"
+            class="hover:bg-red-200 p-1 {% if request.path == '/about/' %} text-white bg-red-500 {% endif %} rounded transition ease-in-out delay-150"
+            >Contact</a
+          >
+          {% if user.is_authenticated %}
+          <a
+            href="{% url 'core:logout' %}"
+            class="hover:bg-red-200 p-1 rounded transition ease-in-out delay-150"
+            >Logout</a
+          >
+          {% else %}
+          <a
+            href="{% url 'core:login' %}"
+            class="hover:bg-red-200 p-1 rounded transition ease-in-out delay-150"
+            >Login</a
+          >
+          {% endif %}
+          <a
+            href="#"
+            class="hover:bg-red-200 p-1 rounded transition ease-in-out delay-150"
+             @click="showSearch = !showSearch"
+            ><i class='bx bx-search' ></i></a
+          >
+        </nav>
+        <div class="md:hidden">
+          <i @click="showSide = !showSide" class="fa-solid fa-bars text-2xl"></i>
+        </div>
+          <div class="flex items-center gap-2">
+              <a href="{% url 'core:myaccount' %}" class="bg-red-100 hover:bg-red-200 p-1"><i class='bx bx-user text-2xl'></i></a>
+              <div tabindex="0" role="button" class="btn btn-ghost btn-circle ghost-red-200">
+          <div class="indicator"
+          hx-get="{% url 'cart:hx_menu_cart' %}"
+          hx-trigger="update-menu-cart from:body"
+          hx-swap="innerHTML"
+          >
+             {% include 'cart/menu_cart.html' %}
+          </div>
+        </div>
+          </div>
+          <div x-show="showSearch" x-cloak @click.away="showSearch = false" class="fixed top-0 h-100vh flex pt-12 items-start text-center justify-center right-0 left-0 bottom-0 z-30 backdrop-blur-sm">
+              <form method="get" action="." class="flex gap-4">
+                  <i @click="showSearch = false" class="fa-solid fa-rectangle-xmark self-center text-3xl  cursor-pointer"></i>
+                  <input class="p-4 rounded-md outline-0" name="query" type="search" placeholder="Search...">
+                  <button type="submit" class="self-center w-10 justify-center h-10 flex items-center bg-red-400 rounded-full hover:bg-red-300 duration-100"><i class='bx bx-search text-xl text-white' ></i></button>
+              </form>
+          </div>
+      </header>  
+
+</section>
+

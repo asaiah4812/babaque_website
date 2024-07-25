@@ -1,0 +1,63 @@
+{% extends 'layout/steps-base.html' %}
+
+{% load static %}
+
+{% block title %} Cart Page {% endblock %}
+
+{% block layout %}
+<section class="mt-[5rem]">
+    
+    <div class="md:w-[80%] lg:w-[75%] w-full min-h-screen mx-auto mt-[5%]">
+        <div class="flex flex-col items-start gap-4 bg-red-100 p-3">
+            <h3 class="font-bold mt-3">
+                Your Cart List
+            </h3>
+            <hr class="w-full mb-3 border border-black">
+            <div class="flex items-center gap-8">
+                <span>Items: <strong>{{cart.count}}</strong></span>
+                <span>Total: <strong><strike>N</strike>{{ cart.get_total_cost }}</strong></span>
+            </div>
+        </div>
+    <div class="overflow-x-auto">
+     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                <tr>
+                    <th scope="col" class="px-16 py-3">
+                        <span class="sr-only">Image</span>
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Product
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Qty
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Price
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+              {% for item in cart %}
+                {% include 'partials/cart_item.html' %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<br>
+<a href="{% url 'order:start_order' %}" class="p-2 bg-blue-500 hover:bg-blue-400 duration-200 mt-5 text-white rounded">Proceed to Checkout</a>
+
+</div>
+
+</section>
+
+
+{% endblock %}
+
+ <!-- hx-get="{% url 'cart:add_to_cart' product.id %}"
+        hx-target="#menu-cart-button"
+        hx-swap="outerHTML" -->

@@ -1,0 +1,225 @@
+{% extends 'layout/steps-base.html' %}
+
+{% load static %}
+
+{% block title %} Checkout page {% endblock %}
+
+{% block layout %}
+
+<section class="w-[95%] md:w-[80%] lg:w-[75%] mt-[2rem] mx-auto py-5">
+    <div class="flex flex-col items-start gap-4 bg-red-100 p-3 mx-auto w-full">
+            <a href="{% url 'cart:cart' %}" class="p-2 border border-md border-black"><i class='bx bx-chevrons-left'></i> Back to Cart</a>
+            <hr class="w-full my-3 border border-black">
+            <div class="flex items-center gap-8 justify-between w-full">
+                <h1 class="font-bold text-2xl ">Checkout</h1>
+                <span>Total: <strong><strike>N</strike>{{ cart.get_total_cost }}</strong></span>
+            </div>
+        </div>
+         <form onsubmit="isCheckOut()" method="POST" class="mx-auto w-full px-4 2xl:px-0">
+            {% csrf_token %}
+            <div class="mt-6 sm:mt-8 lg:flex lg:items-start lg:gap-12 xl:gap-16">
+            <div class="min-w-0 flex-1 space-y-8">
+                <div class="space-y-4">
+                <h2 class="text-xl font-semibold text-gray-900">Delivery Details</h2>
+
+                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    <!-- first name input -->
+                    <div>
+                    <label for="your_name" class="mb-2 block text-sm font-medium text-gray-900"> First name* </label>
+                    <input type="text" id="your_name" name="first_name" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500" placeholder="Bonnie" required />
+                    </div>
+                    <!-- second name input -->
+                    <div>
+                    <label for="your_second" class="mb-2 block text-sm font-medium text-gray-900"> Last name* </label>
+                    <input type="text" id="your_second" name="last_name" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500" placeholder="surname" required />
+                    </div>
+
+                    <div>
+                        <!-- phone number input -->
+                    <label for="phone-input-3" class="mb-2 block text-sm font-medium text-gray-900"> Phone Number* </label>
+                    <div class="flex items-center">
+                        <button id="dropdown-phone-button-3" data-dropdown-toggle="dropdown-phone-3" class="z-10 inline-flex shrink-0 items-center rounded-s-lg border border-gray-300 bg-gray-100 px-4 py-2.5 text-center text-sm font-medium text-gray-900 hover:bg-gray-200 focus:outline-none focus:ring-4 focus:ring-gray-100" type="button">
+                        <img src="{% static 'images/icons/flag.png' %}" class="me-1 w-[20px] md:w-[25px]" alt="ng">
+                        +234
+                        <svg class="-me-0.5 ms-2 h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7" />
+                        </svg>
+                        </button>
+                        <div class="relative w-full">
+                        <input type="text" id="phone-input" name="phone" class="z-20 block w-full rounded-e-lg border border-s-0 border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500" placeholder="07039256612" required />
+                        </div>
+                    </div>
+                    </div>
+                    <!-- email input fill -->
+                    <div>
+                    <label for="email" class="mb-2 block text-sm font-medium text-gray-900"> Email </label>
+                    <input type="email" id="email" name="email" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500" placeholder="name@dreamer.com" required />
+                    </div>
+                    <!-- country input -->
+                    <div>
+                        <label for="countries_disabled" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white ">Select a Country*</label>
+                    <div class="flex flex-">
+            
+                    <label for="states" class="sr-only">Choose a state</label>
+                    <select  name="country" id="country" aria-label="Select Country" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                        <option disabled selected>Choose a country</option>
+                    </select>
+                </div>
+                    </div>
+                    <!-- state input -->
+                    <div>
+                    <div class="mb-2 flex items-center gap-2">
+                        <label for="state" class="block text-sm font-medium text-gray-900"> State* </label>
+                    </div>
+                    <select id="state" name="state" aria-label="Select State" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500">
+                        <option disabled selected>Choose a State</option>
+                    </select>
+                    </div>
+                    <!-- city input field -->
+                    <div>
+                    <div class="mb-2 flex items-center gap-2">
+                        <label for="city" class="block text-sm font-medium text-gray-900"> City* </label>
+                    </div>
+                    <select id="city" name="city" aria-label="Select State" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500">
+                        <option disabled selected>Choose a State</option>
+                    </select>
+                    </div>
+                    <!-- zipcode inputfield -->
+                    <div>
+                    <label for="vat_number" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"> Zipcode </label>
+                    <input type="text" id="vat_number" name="zipcode" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500" placeholder="313253" required />
+                    </div>
+
+                    <div class="sm:col-span-2">
+                    <button type="submit" class="flex w-full items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100">
+                        <svg class="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5" />
+                        </svg>
+                        Add new address
+                    </button>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            <div class="mt-6 w-full space-y-6 sm:mt-8 lg:mt-0 lg:max-w-xs xl:max-w-md">
+                <div class="flow-root">
+                <div class="-my-3 divide-y divide-gray-200">
+                    <dl class="flex items-center justify-between gap-4 py-3">
+                    <dt class="text-base font-normal text-gray-500">Subtotal</dt>
+                    <dd class="text-base font-medium text-gray-900"><strike>N</strike>{{ cart.get_total_cost }}</strong></dd>
+                    </dl>
+
+                    <dl class="flex items-center justify-between gap-4 py-3">
+                    <dt class="text-base font-normal text-gray-500">Savings</dt>
+                    <dd class="text-base font-medium text-green-500">0</dd>
+                    </dl>
+
+                    <dl class="flex items-center justify-between gap-4 py-3">
+                    <dt class="text-base font-normal text-gray-500">Tax</dt>
+                    <dd class="text-base font-medium text-gray-900"><strike>N</strike>1</dd>
+                    </dl>
+
+                    <dl class="flex items-center justify-between gap-4 py-3">
+                    <dt class="text-base font-bold text-gray-900">Total</dt>
+                    <dd class="text-base font-bold text-gray-900"><strong><strike>N</strike>{{ cart.get_total_cost }}</strong></dd>
+                    </dl>
+                </div>
+                </div>
+
+                <div class="space-y-3">
+                <button type="submit" id="save-btn"  class="flex w-full items-center justify-center rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4  focus:ring-primary-300">Proceed to Payment</button>
+
+                <p class="text-sm font-normal text-gray-500">One or more items in your cart require an account. <a href="#" title="" class="font-medium text-primary-700 underline hover:no-underline">Sign in or create an account now.</a>.</p>
+                </div>
+            </div>
+            </div>
+        </form>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<!-- <script type="application/javascript" src="https://js.stripe.com/v3/"></script>
+<script>
+    let el = document.querySelector('#errors');
+
+    function validateForm(data) {
+        let errors = [];
+
+        if (data.first_name === '') errors.push('First name is Empty');
+        if (data.last_name === '') errors.push('Last name is Empty');
+        if (data.email === '') errors.push('Email field is Empty');
+        if (data.phone === '') errors.push('Phone Field is Empty');
+        if (data.location === '') errors.push('Location Field is Empty');
+        if (data.zipcode === '') errors.push('Zipcode Field is Empty');
+        if (data.place === '') errors.push('Place Field is Empty');
+
+        if (errors.length > 0) {
+            let html = '<ul>';
+            errors.forEach(error => html += '<li>' + error + '</li>');
+            el.innerHTML = html + '</ul>';
+        } else {
+            el.innerHTML = '';
+        }
+
+        return errors;
+    }
+
+    function buy(event) {
+        event.preventDefault();
+         console.log('Buy function triggered');
+        let data = {
+            'first_name': document.querySelector('input[name=first_name]').value,
+            'last_name': document.querySelector('input[name=last_name]').value,
+            'email': document.querySelector('input[name=email]').value,
+            'phone': document.querySelector('input[name=phone]').value,
+            'location': document.querySelector('select[name=location]').value,
+            'zipcode': document.querySelector('input[name=zipcode]').value,
+            'place': document.querySelector('input[name=place]').value,
+        };
+
+        let errors = validateForm(data);
+        if (errors.length) {
+            console.log('Errors', errors);
+        } else {
+            var stripe = Stripe('{{ pub_key }}');
+            fetch('/order/start_order/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                credentials: 'same-origin',
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(session => stripe.redirectToCheckout({ sessionId: session.session.id }))
+            .then(result => {
+                if (result.error) {
+                    alert(result.error.message);
+                }
+            })
+            .catch(error => console.log('Errors', error));
+        }
+        return false;
+    } -->
+<!-- </script> -->
+ <script>
+       const saveBtn = document.querySelector("#save-btn")
+       function isCheckOut() {
+        saveBtn.innerHTML = `
+        <div role="status" class="flex items-center justify-center">
+            <svg aria-hidden="true" class="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+            </svg>
+            <span class="sr-only">Loading...</span>
+        </div>
+        `
+saveBtn.style = "background: #3b82f6;"
+       }
+    </script>
+{% endblock %}
+
+
+   <!-- <span class="text-2xl font-medium"><strike>N</strike>{{ cart.get_total_cost }}</span> -->

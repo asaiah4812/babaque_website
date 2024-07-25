@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Profile Page {% endblock %}
+
+{% block content %}
+
+<section class="w-full md:w-[80%] mx-auto flex flex-col mb-5 p-4 border mt-[6rem] justify-center ">
+    <h1 class="text-3xl font-bold mb-4 ">My account</h1>
+    <div class="mb-6 space-y-3">
+        <div class="py-2">
+         <strong class="text-xl">Full Name: </strong> {{ request.user.get_full_name}} 
+        </div>
+         <div class="py-2">
+         <strong class="text-xl">Name: </strong> {{ request.user.username}} 
+        </div>
+         <div class="py-2">
+         <strong class="text-xl">Email: </strong> {{ request.user.email}} 
+        </div>
+         <p>This are Your account Informations</p>
+        <a href="{% url 'core:edit_myaccount' %}" class="p-2 float-right border border-md hover:bg-red-300 duration-200">Edit my account</a>
+    </div>
+    <hr>
+    <h2 class="my-6 text-xl">My Order</h2>
+     <table class="table table-zebra w-full">
+    <!-- head -->
+    <thead>
+      <tr>
+        <th>Item Image</th>
+        <th>Item</th>
+        <th>Price</th>
+        <th class="hidden sm:block">Total</th>
+        <th class="hidden sm:block">Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for order in request.user.orders.all %}
+      <!-- row 1 -->
+       <!-- {{order.id}} -->
+       {% for item in order.items.all %}
+      <tr>
+        <td>
+          <div class="flex items-center gap-3">
+            <div class="avatar">
+              <div class="mask w-12 h-12">
+                <img src="{{ item.product.get_thumbnail }}" alt="Avatar Tailwind CSS Component" />
+              </div>
+            </div>
+            
+          </div>
+        </td>
+        <td>
+          <div>
+              <div class="font-bold">{{item.product.name}}</div>
+            </div>
+        </td>
+        <td>
+          <strike>N</strike>{{item.product.price}}
+        </td>
+        <th class="hidden sm:block">
+          <button class="btn btn-ghost btn-xs"><strike>N</strike>{{item.total_price}}</button>
+        </th>
+        <td class="hidden sm:block">
+            {{order.create_at|timesince}}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    <!-- foot -->
+    <tfoot>
+      <tr>
+        <th>Date: {{order.created_at}}</th>
+        <th>Favorite Color</th>
+        <th>{{order.id}}</th>
+      </tr>
+    </tfoot>
+    {% endfor %}
+  </table>
+   </section>
+
+   {% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'layout/steps-base.html' %}
+
+{% load static %}
+
+{% block title %} Checkout page {% endblock %}
+
+{% block layout %}
+<div class="flex flex-col items-center justify-center min-h-[50dvh] px-4 md:px-6 py-12 md:py-24 lg:py-32">
+  <div class="w-full text-center space-y-4">
+    <div class="bg-green-100 rounded-full p-4 inline-flex">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="h-8 w-8 text-green-500"
+      >
+        <path d="M20 6 9 17l-5-5"></path>
+      </svg>
+    </div>
+    <h1 class="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Payment Successful</h1>
+    <p class="text-gray-500 text-md md:text-xl">
+     Your order was successfully received, we'll begin processing ASAP. Here's your ref NO: <br>{{payment.ref}}
+    </p>
+  </div>
+</div>
+<div class="bg-gray-100 py-12 md:py-24 lg:py-32">
+  <div class="container px-4 md:px-6">
+    <div class="max-w-md mx-auto space-y-6">
+      <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
+        <div class="flex flex-col space-y-1.5 p-6">
+          <h3 class="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight">Payment Details</h3>
+        </div>
+        <div class="p-6 grid gap-4">
+          <div class="flex items-center justify-between">
+            <div class="text-gray-500">Plan</div>
+            <div class="font-medium">Pro</div>
+          </div>
+          <div class="flex items-center justify-between">
+            <div class="text-gray-500">Amount Paid</div>
+            <div class="font-medium">$99.00</div>
+          </div>
+          <div class="flex items-center justify-between">
+            <div class="text-gray-500">Transaction ID</div>
+            <div class="font-medium">123456789</div>
+          </div>
+        </div>
+      </div>
+      <a
+        class="inline-flex h-10 items-center justify-center rounded-md bg-gray-900 px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-gray-900/90 disabled:pointer-events-none disabled:opacity-50"
+        href="{% url 'core:home' %}"
+      >
+        Go to Home
+      </a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

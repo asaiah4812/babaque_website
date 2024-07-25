@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} About Page {% endblock %}
+
+ {% block content %}
+ <style>
+    .cover{
+        margin-top: 5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background-attachment: fixed;
+        height: 40vh;
+        background-image: url('/static/images/bg/contact.jpg');
+        background-position: center;
+        background-size: cover;
+        
+    }
+    .top {
+    animation: top 1.5s ease-in-out;
+  }
+    @keyframes top {
+    from {
+      transform: translateY(-300%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+      
+    }
+  }
+ </style>
+
+ <section class="cover">
+    <h1 class="text-6xl text-white font-bold top">Contact Us</h1>
+ </section>
+<section class="flex flex-wrap md:flex-nowrap justify-between w-[95%] md:w-[80%] lg:w-[70%] mx-auto mt-[3rem] gap-8 ">
+    <form class="w-full mx-auto">
+        <h1 class="space-x-2 flex items-center mb-3 border-b"><div class="w-7 h-7 bg-rose-300"></div> <span class="font-bold text-2xl py-6">GET IN TOUCH</span></h1>
+  <div class="mb-5">
+    <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Your Fullname</label>
+    <input type="textl" id="name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5t" placeholder="Asaiah Henson" required />
+  </div>
+  <div class="mb-5">
+    <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Your email</label>
+    <input type="email" id="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="jeremy@russy.com" required />
+  </div>
+  <div class="mb-5">
+    <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your message</label>
+  <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Leave a comment..."></textarea>
+  </div>
+  <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Send</button>
+  </form>
+  <div class="w-full">
+    <h1 class="space-x-2 flex items-center mb-3 border-b"><div class="w-7 h-7 bg-rose-300"></div> <span class="font-bold text-2xl py-6">CONTACT DETAIL</span></h1>
+    <div class="space-y-2 p-4 border">
+        <h2 class="font-bold">Address</h2>
+        <div class="space-x-2">
+            <i class="fa-solid fa-location-dot text-xl"></i> <span>1 Gowon street, Jos Pleateau state Nigeria</span>
+        </div>
+    </div>
+    <div class="space-y-2 p-4 border">
+        <h2 class="font-bold">Phone</h2>
+        <div class="space-x-2">
+            <i class="fa-solid fa-phone"></i> <span>+234 7039256612</span>
+        </div>
+    </div>
+    <div class="space-y-2 p-4 border">
+        <h2 class="font-bold">Email Address</h2>
+        <div class="space-x-2">
+            <i class="fa-solid fa-envelope"></i> <span>1 Gowon street, Jos Pleateau state Nigeria</span>
+        </div>
+    </div>
+    <div class="space-y-2 p-4 border">
+        <h2 class="font-bold">Social media</h2>
+        <div class="space-x-3 flex item-center">
+            <a href="#" class="[&>i]:text-2xl [&>i]:lg:text-3xl"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#" class="[&>i]:text-2xl [&>i]:lg:text-3xl"><i class="fa-brands fa-square-whatsapp"></i></a>
+            <a href="#" class="[&>i]:text-2xl [&>i]:lg:text-3xl"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" class="[&>i]:text-2xl [&>i]:lg:text-3xl"><i class="fa-brands fa-square-instagram"></i></a>
+        </div>
+    </div>
+  </div>
+</section>
+<section class="w-full md:w-[80%] lg:w-[70%] p-8 mx-auto h-fit">
+    <h1 class="text-2xl md:text-3xl font-bold bg-slate-100 px-2 py-5">Scan The Below QRCODE to Visit Our Website</h1>
+  <div class="h-full sm:h-full w-full md:w-[70%]" method="POST">
+
+    <img
+      src="{{obj.qr_code.url}}"
+      alt=""
+      class="h-[400px] w-[400px] object-cover"
+    />
+    <div class="mt-3">
+      <h3 class="text-sm text-gray-700 group-hover:underline group-hover:underline-offset-4">
+         QRCODE to Our Website
+      </h3>
+  
+      <p class="mt-1.5 text-pretty text-xs text-gray-500">
+       Confirm Your Otp Code
+      </p>
+    </div>
+
+  </div>
+
+</section>
+ <section class="bg-white w-[95%] mx-auto md:w-[80%] lg:w-[70%]">
+    <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16">
+        <div class="bg-gray-50 dark:bg-gray-800 border border-gray-200 rounded-lg p-8 md:p-12 mb-8">
+            <a href="#" class="bg-blue-100 text-blue-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded-md mb-2">
+                <svg class="w-2.5 h-2.5 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14">
+                    <path d="M11 0H2a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm8.585 1.189a.994.994 0 0 0-.9-.138l-2.965.983a1 1 0 0 0-.685.949v8a1 1 0 0 0 .675.946l2.965 1.02a1.013 1.013 0 0 0 1.032-.242A1 1 0 0 0 20 12V2a1 1 0 0 0-.415-.811Z"/>
+                </svg>
+                Tutorial
+            </a>
+            <h1 class="text-gray-900 dark:text-white text-3xl md:text-5xl font-extrabold mb-2">How to quickly deploy a static website</h1>
+            <p class="text-lg font-normal text-gray-500 mb-6">Static websites are now used to bootstrap lots of websites and are becoming the basis for a variety of tools that even influence both web designers and developers.</p>
+            <a href="#" class="inline-flex justify-center items-center py-2.5 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300">
+                Read more
+                <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                </svg>
+            </a>
+        </div>
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-8 md:p-12">
+                <a href="#" class="bg-green-100 text-green-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded-md dark:text-green-400 mb-2">
+                    <svg class="w-2.5 h-2.5 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+                        <path d="M17 11h-2.722L8 17.278a5.512 5.512 0 0 1-.9.722H17a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1ZM6 0H1a1 1 0 0 0-1 1v13.5a3.5 3.5 0 1 0 7 0V1a1 1 0 0 0-1-1ZM3.5 15.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2ZM16.132 4.9 12.6 1.368a1 1 0 0 0-1.414 0L9 3.55v9.9l7.132-7.132a1 1 0 0 0 0-1.418Z"/>
+                    </svg>
+                    Design
+                </a>
+                <h2 class="text-gray-900 dark:text-white text-3xl font-extrabold mb-2">Start with Flowbite Design System</h2>
+                <p class="text-lg font-normal text-gray-500 mb-4">Static websites are now used to bootstrap lots of websites and are becoming the basis for a variety of tools that even influence both web designers and developers.</p>
+                <a href="#" class="text-blue-600 hover:underline font-medium text-lg inline-flex items-center">Read more
+                    <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                </svg>
+                </a>
+            </div>
+            <div class="bg-gray-50 border border-gray-200 rounded-lg p-8 md:p-12">
+                <a href="#" class="bg-purple-100 text-purple-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded-md mb-2">
+                    <svg class="w-2.5 h-2.5 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4 1 8l4 4m10-8 4 4-4 4M11 1 9 15"/>
+                    </svg>
+                    Code
+                </a>
+                <h2 class="text-gray-900 text-3xl font-extrabold mb-2">Best react libraries around the web</h2>
+                <p class="text-lg font-normal text-gray-500 mb-4">Static websites are now used to bootstrap lots of websites and are becoming the basis for a variety of tools that even influence both web designers and developers.</p>
+                <a href="#" class="text-blue-600 hover:underline font-medium text-lg inline-flex items-center">Read more
+                    <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

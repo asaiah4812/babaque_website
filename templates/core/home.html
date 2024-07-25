@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Home Page {% endblock %}
+
+{% block content %}
+
+{% include 'includes/style.html' %}
+
+    <section class="mt-[7rem] h-[30vh] md:h-[40vh] w-[95%] md:w-[80%] lg:w-[75%] bg-gradient-to-r from-red-200 via-white to-rose-200 mx-auto rounded-xl flex items-center justify-center relative overflow-hidden bbq">
+         <img src="{% static '/images/logo/logo2.svg' %}" class="w-[150px] md:w-[260px] slider delay-1000" alt="">
+        <img class="absolute w-[100px] lg:w-[300px] right-5 bottom-0 slide-in-right" src="{% static 'images/meat/bbq.svg' %}" alt="">
+        <img class="absolute top-2 slide-in-top  w-[80px] md:-top-5 md:left-[35%] lg:w-[200px]" src="{% static '/images/meat/food.svg' %}" alt="">
+        <img class="absolute left-0 slide-in-left bottom-0 w-[100px] lg:w-[300px]" src="{% static '/images/meat/meat1.png' %}" alt="">
+        <!-- <img class="absolute bottom-0 w-[90px] lg:w-[260px] slide-in-bottom" src="{% static '/images/meat/meat4.svg' %}" alt=""> -->
+    </section>
+    <section class="flex flex-col items-center gap-3 w-[95%] md:w-[85%] lg:w-[75%] mx-auto my-10">
+        <h1 class="text-2xl font-bold md:self-start bg-gradient-to-br from-red-200 to-slate-50 px-1 rounded-lg py-2 w-full">BROWSE OUR PRODUCT</h1>
+        <div class="my-2 w-full" x-data="{ tab: 'tab1'}">
+            <div class="flex items-center gap-3 rounded-md">
+                <a href="#" @click.prevent="tab = 'tab1'" :class="{ 'bg-red-500 text-white' : tab === 'tab1' }" class="hover:bg-red-300 p-1 rounded transition ease-in-out delay-150">Popular</a> 
+                <a href="#" class="hover:bg-red-300 p-1 rounded transition ease-in-out delay-150">Featured</a> 
+                <a href="#" class="hover:bg-red-300 p-1 rounded transition ease-in-out delay-150">Trending</a> 
+            </div>
+            <div x-show="tab === 'tab1'" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 self-center gap-3 md:gap-6 lg:gap-8 mt-5">
+                {% for product in products %}
+                {% include 'partials/product_list_item.html' %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="py-3 mx-auto ">
+            {% include 'includes/pagination.html' with page=posts %}
+        </div>
+    </section>
+    <section class="back my-5 h-[40vh] w-full md:w-[80%] mx-auto lg:w-[75%] rounded-lg flex flex-col item-center justify-center gap-3 text-center">
+        <h1 class="text-white text-4xl font-bold">RUSSY'S BBQ</h1>
+        <h3 class="text-white">Enjoy our Black Friday Discount 50% off</h1>
+        <a class="text-white border border-sm self-center p-2 hover:bg-white hover:text-black" href="#">Learn More</a>
+    </section>
+    <section class=" w-full sm:w-[90%] md:w-[80%] lg:w-[75%] mx-auto my-10">
+        <h1 class="text-3xl font-bold w-[95%] w-full px-1 rounded-lg py-2 mb-8 bg-gradient-to-br from-red-200 to-slate-50">TESTIMONIES</h1>
+        <div class="flex flex-col gap-10">
+            <section class="bg-white">
+                <div class="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+                    <h2 class="text-center text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+                        Read trusted reviews from our customers
+                    </h2>
+                    
+                    <div class="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-8">
+        {% for testimonial in testimonies %}
+
+      <blockquote class="rounded-lg bg-gray-50 p-6 shadow-sm sm:p-8 hover:shadow-lg">
+        <div class="flex items-center gap-4">
+          <img
+            alt="{{testimonial.author}}"
+            src="{{ testimonial.avatar.url }}"
+            class="size-14 rounded-full object-cover"
+          />
+
+          <div>
+            <div class="flex justify-center gap-0.5 text-green-500">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                />
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                />
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                />
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                />
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                />
+              </svg>
+            </div>
+
+            <p class="mt-0.5 text-lg font-medium text-gray-900">{{ testimonial.author }}</p>
+          </div>
+        </div>
+
+        <p class="mt-4 text-gray-700">
+          {{ testimonial.body }}
+        </p>
+      </blockquote>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+   
+
+    </section>
+
+{% endblock %}

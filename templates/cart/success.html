@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Success {% endblock %}
+
+{% block content %}
+
+<section class="min-h-[50vh] w-[95%] md:max-w-[75%]  mx-auto">
+
+    <div class="w-full bg-green-200  p-4 mt-[4rem] rounded-2xl flex flex-col space-y-5 items-start">
+        <p class="text-2xl lg:text-3xl">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit vero cupiditate temporibus sed aliquam ut ducimus expedita corrupti debitis eaque.
+        </p>
+        <a href="{% url 'core:home' %}" class="py-1 px-2 text-white hover:bg-green-600 rounded-lg bg-green-700 mt-5">Back Home</a>
+    </div>
+</section>
+
+{% endblock %}

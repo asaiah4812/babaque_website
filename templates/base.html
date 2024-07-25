@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.10.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script> 
+    <!-- htmx link -->
+
+    <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
+    <!-- font awesome icon links -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+      <!-- noti message link -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+    <!-- boxi icon links -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- alpine js links -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- font share link -->
+    <link href="https://api.fontshare.com/v2/css?f[]=poppins@100,101,200,201,300,301,400,401,500,501,600,601,700,701,800,801,900,1,2&f[]=panchang@800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- website logo image -->
+  <link rel="icon" sizes="16x16" href="{% static '/images/logo/logo2.svg' %}"">
+    <!-- bootstrap cdnlink -->
+     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+  <section class="relative bg-stone-50 py-2">
+    <div class="fixed bottom-[2%] right-[5%] flex flex-col gap-3 items-end z-40 cursor-pointer" x-data="{ onWhatapp: false }">
+      <div x-cloak x-show="onWhatapp" @click.away="onWhatapp = false" class="rounded-lg overflow-hidden">
+        <form action="" class="bg-gray-400 space-y-3">
+          <div class="flex justify-between bg-green-700">
+            <h2 class="px-1 py-3 text-lg font-bold text-white">Chat with Us on Whatapp</h2>
+            <button title="close chat" class="p-1 rounded-full" @click.prevent="onWhatapp = false"><i class="fa-solid fa-circle-xmark hover:text-white text-2xl"></i></button>
+          </div>
+          <div class="w-[80%] p-1">
+            Hi, welcome to RUSSY'S BBQ, how can we help you today 🙂
+          </div>
+          <div class="bg-gray-200 rounded-md p-2 flex gap-2 w-full">
+            <input value="Hi RUSSY'S BBQ am {% if user.is_authenticated %}{{request.user.username}}{% endif %}"  class="w-full border-none outline-none bg-transparent bg-gray-300"/>
+            <a href="https://wa.me/+2349036804525?text=I'm%20interested%20in%20your%20car%20to%chat" target="_blank"><i class='bx bxs-send text-lg'></i></a>
+          </div>
+        </form>
+      </div>
+      <div @click="onWhatapp = !onWhatapp">
+        <img src="{% static 'images/whatsapp/whatsapp.png' %}" alt="">
+      </div>
+    </div>
+    {% include 'includes/loader.html' %}
+    {% include 'includes/navbar.html' %}  
+    {% block content %}
+
+    {% endblock %}
+    {% include 'includes/footer.html' %}
+    {% block scripts %}
+    {% endblock %}
+    <script>
+    var msg_levels = { 20: 'info', 25: 'success', 30: 'warning', 40: 'error' };
+    
+      {% if messages %}
+        {% for msg in messages %}
+          new Noty({
+              type: msg_levels['{{msg.level}}'],
+              text: '{{msg}}',
+              timeout: 5000,
+              theme: 'metroui'
+          }).show();
+        {% endfor %}
+      {% endif %}
+
+
+</script>
+<script src="{% static 'js/script.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> --> 
+</section>
+ <script>
+  var loader = document.querySelector('.loader');
+
+window.addEventListener("load", function(){
+  setTimeout(function(){
+    loader.style.display = "none";
+  }, 3000); // Hides the loader after 3 seconds (3000 milliseconds)
+});
+ </script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<style>
+  .bbq{
+    background-image: url('static/images/bg/bbq.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+
+  .slide-in-right {
+    animation: slide-in-right 1.5s ease-in-out;
+    /* animation-delay: 5s; */
+  }
+
+  .slide-in-left {
+    animation: slide-in-left 1.5s ease-in-out;
+  }
+
+  .slide-in-top {
+    animation: slide-in-top 1.5s ease-in-out;
+  }
+
+  .slide-in-bottom {
+    animation: slide-in-bottom 2s ease-in-out;
+  }
+
+  .slider {
+    animation: myAnim 2s ease 0s 1 normal forwards;
+  }
+
+  @keyframes myAnim {
+    0% {
+      animation-timing-function: ease-in;
+      opacity: 0;
+      transform: translateY(-250px);
+    }
+
+    38% {
+      animation-timing-function: ease-out;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    55% {
+      animation-timing-function: ease-in;
+      transform: translateY(-65px);
+    }
+
+    72% {
+      animation-timing-function: ease-out;
+      transform: translateY(0);
+    }
+
+    81% {
+      animation-timing-function: ease-in;
+      transform: translateY(-28px);
+    }
+
+    90% {
+      animation-timing-function: ease-out;
+      transform: translateY(0);
+    }
+
+    92% {
+      animation-timing-function: ease-in;
+      transform: translateY(-10px);
+    }
+
+    95% {
+      animation-timing-function: ease-out;
+      transform: translateY(-5px);
+    }
+    100% {
+      animation-timing-function: ease-in;
+      transform: translateY(0);
+	  z-index: 1;
+    }
+  }
+
+  @keyframes slide-in-right {
+    from {
+      transform: translateX(100%) rotate(360deg);
+    }
+    to {
+      transform: translateX(0) rotate(0deg);
+    }
+  }
+
+  @keyframes slide-in-left {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slide-in-top {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+      
+    }
+  }
+
+  @keyframes slide-in-bottom {
+    from {
+      transform: rotate(90deg) translateY(10px);
+    }
+    to {
+      transform: rotate(0) translateY(0);
+    }
+  }
+</style>

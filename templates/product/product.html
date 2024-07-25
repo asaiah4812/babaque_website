@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+
+    <section class="flex flex-wrap md:flex-row flex-col items-center justify-between gap-8 w-full md:w-[80%] lg:w-[75%] mx-auto mt-[5%] border p-3 border-red-400 mb-10 mt-[7rem]">
+      <div class="flex-1">
+        <img class="w-[500px] h-full object-cover" src="{% if product.image %} {{product.image.url}} {% else %} https://via.placeholder.com/240x240x.jpg {% endif %}" alt="" />
+      </div>
+      <div class="flex flex-col gap-5 flex-1">
+        <span class="text-lg"><i class="fa-regular fa-star"></i> 5.00 (review)</span>
+        <h1 class="text-3xl font-bold">{{product.name}}</h1>
+        <p>
+          {{product.description}}
+        </p>
+        <h3 class="text-lg font-medium">Ingredients: <span class="font-light">Onions, maggi, meat, tomatoes ...</span></h3>
+        <h3 class="text-lg font-medium">Calories: <span class="font-light">375cal.</span></h3>
+        <h3 class="text-lg font-medium">Price: <span class="font-light"><strike>N</strike>{{product.price}}</span></h3>
+        <a
+         hx-get="{% url 'cart:add_to_cart' product.id %}"
+         hx-target="#menu-cart-button"
+         hx-swap="outerHTML"
+         class="bg-red-600 py-3 text-center text-white font-medium duration-100 hover:bg-red-500 duration-100 ease-in-out cursor-pointer"
+         >ADD TO CART</a>
+        <small class="text-center">or</small>
+        <a href="#" class="border border-2 border-red-600 hover:bg-red-600 hover:text-white py-3 text-center text-red-600 font-medium">BOOK A TABLE</a>
+      </div>
+    </section>
+
+{% endblock %}

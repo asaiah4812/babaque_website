@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} {% endblock %}
+
+{% block content %}
+
+<section class="h-screen w-full md:w-[80%] mx-auto flex flex-col">
+    <h1 class="text-4xl font-bold mb-4">My account</h1>
+    <p class="py-3">Manage your personal information and settings.</p>
+    
+    <!-- User info -->
+    <form method="POST" class="w-full shadow-xl border border-md flex flex-col items-start gap-5 py-8 px-4 rounded-md">
+        {% csrf_token %}
+        <!-- User information -->
+        <div class="flex flex-col gap-3 w-full">
+            <label for="firstname">First name</label>
+            <input class="w-full py-3 px-2 outline-0" id="firstname" value="{{request.user.first_name}}" type="text" name="first_name">
+        </div>
+        <div class="flex flex-col gap-3 w-full">
+            <label for="lastname">Last name</label>
+            <input class="w-full py-3 px-2 outline-0" id="lastname" value="{{request.user.last_name}}" type="text" name="last_name">
+        </div>
+        <div class="flex flex-col gap-3 w-full">
+            <label for="username">Username</label>
+            <input class="w-full py-3 px-2 outline-0" id="username" value="{{request.user.username}}" type="text" name="username">
+        </div>
+        <div class="flex flex-col gap-3 w-full">
+            <label for="email">Email</label>
+            <input class="w-full py-3 px-2 outline-0" id="email" value="{{request.user.email}}" type="text" name="email">
+        </div>
+        <div class="flex flex-col gap-3 w-full">
+            <label for="password1">Password</label>
+            <input class="w-full py-3 px-2 outline-0" id="password1" type="password" value="*******" name="password1">
+        </div>
+        <div class="flex flex-col gap-3 w-full">
+            <label for="password">Confirm Password</label>
+            <input class="w-full py-3 px-2 outline-0" id="password2" type="password" value="*******" name="password2" >
+        </div>
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded3">Submit</button>
+    </form>
+   </section>
+
+   {% endblock %}

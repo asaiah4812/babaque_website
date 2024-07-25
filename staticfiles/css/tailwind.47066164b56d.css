@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  font-family: "Poppins", sans-serif;
+}
+
+[x-cloak] {
+    display: none !important;
+}
+
+.header {
+  font-family: "Panchang", sans-serif;
+  font-size: 900;
+  font-size: 150px;
+}
+
+@media (max-width: 1386px) {
+  .header {
+    font-size: 120px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .header {
+    font-size: 90px;
+  }
+}
+
+@media(max-width:855px){
+   .header{
+    font-size: 70px;
+   } 
+}
+
+@media(max-width:655px){
+    .header{
+        font-size:  40px;
+    }
+  }
+  @media(max-width:400px){
+  .header{
+      font-size:  30px;
+  }
+
+}
+:root {
+  --bg: #f8fafc;
+  --bghover: #fee2e2;
+  --bghover:#fecaca;
+}
+
+body {
+  background: var(--bg);
+}
+
+.back {
+  background-image: linear-gradient(
+      to bottom,
+      rgba(34, 34, 34, 0.5),
+      rgba(12, 9, 11, 0.7)
+    ),
+    url("/static/images/bg/pexels-everson-mayer-1481284.b313cf8772ec.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+.menu {
+  background-image: linear-gradient(
+      to bottom,
+      rgba(34, 34, 34, 0.5),
+      rgba(12, 9, 11, 0.7)
+    ),
+    url("/static/images/bg/emerson-vieira-cpkPJ-U9eUM-unsplash.4cfcd3117603.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+.contact{
+  background-image: url("/static/images/bg/newbg.a0cc4487516e.jpg"); 
+  height: 40vh;
+  background-position: center;
+  background-size: cover;
+}
+
+/* table css section styling */
+

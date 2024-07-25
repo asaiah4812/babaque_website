@@ -1,0 +1,14 @@
+{% load static %}
+<div class="lg:px-5 p-1 lg:py-4 rounded-lg flex flex-col gap-2 bg-red-100 duration-100 hover:shadow-xl shadow">
+    <div class="h-[250px] lg:h-[300px] overflow-hidden rounded-lg">
+        <img class="w-full object-cover hover:scale-110 ease-in-out duration-200" src="{{product.get_thumbnail}}" alt="">
+    </div>
+    <h3 class="text-xl font-medium">{{product.name}}</h3>
+    <div class="flex items-center justify-between"><span><small class="text-slate-500"><strike>N2500</strike></small> <strike>N</strike>{{product.get_display_price}}</span> <a href="#"
+        class=""
+        hx-get="{% url 'cart:add_to_cart' product.id %}"
+        hx-target="#menu-cart-button"
+        hx-swap="outerHTML"
+        ><i class='bx bxs-cart-alt bg-red-500 active:ring ring-red-700 hover:bg-red-400 text-white p-2 text-xl rounded-xl' ></i></a></div>
+    <a href="{{product.get_absolute_url}}" class="bg-red-400 self-start py-1 px-2 hover:bg-red-200 rounded-md hover:bg-red-400 transition text-white ease-in-out w-full md:w-max text-center">View detail</a>
+</div>
