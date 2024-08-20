@@ -31,6 +31,7 @@ class Order(models.Model):
 
     class Meta:
         ordering = ['-create_at']
+    
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE)
@@ -40,3 +41,4 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return self.product.name
+

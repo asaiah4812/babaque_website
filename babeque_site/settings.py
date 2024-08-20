@@ -39,8 +39,6 @@ CART_SESSION_ID = 'cart'
 
 # SITE_ID = 1
 
-# STRIPE_API_KEY_PUBLISHABLE = 'pk_test_51NfQX2QaELRkGvtQ28KbyMyuH4yq4QIGU4KIpTIEzz5uLysBKHBM4Z2c0BPVT1pfrIVL6F3gS4XH7GeHVhHq4W1Y00AQvQHOAa'
-# STRIPE_API_KEY_HIDDEN = 'sk_test_51NfQX2QaELRkGvtQwhl6ngaCOOo6vbjthb4JPXmKZPiVGuCMUsFHBw7UmuFr2du87QpdkXFtt5D70L2t8RyoQf7J00gQilSMS9'
 
 
 # Application definition
@@ -209,21 +207,9 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = 'core:login'
 
-AUTHENTICATION_BACKENDS = [
- 'django.contrib.auth.backends.ModelBackend',
- 'core.authentication.EmailAuthBackend',
- 'social_core.backends.google.GoogleOAuth2',
-]
+# AUTHENTICATION_BACKENDS = [
+#  'django.contrib.auth.backends.ModelBackend',
+#  'core.authentication.EmailAuthBackend',
+#  'social_core.backends.google.GoogleOAuth2',
+# ]
 
-
-
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '255499810379-cedjfiufpiq2d3e9gg7q3tcm3houg745.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
-EMAIL_HOST_USER = 'e91f6b5e87c8d6'
-EMAIL_HOST_PASSWORD = 'd44041b717e719'
-EMAIL_PORT = '2525'
-EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False
